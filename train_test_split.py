@@ -4,7 +4,6 @@ import shutil
 
 imgList = os.listdir('images')
 
-
 #shuffling images
 random.shuffle(imgList)
 
@@ -27,24 +26,27 @@ print("Training images: ", len(train_images))
 print("Validation images: ", len(val_images))
 
 for imgName in train_images:
+    basename, extension = os.path.splitext(imgName)
     og_path = os.path.join('images', imgName)
     target_path = os.path.join(train_path, imgName)
-
+    
     shutil.copyfile(og_path, target_path)
-
-    og_txt_path = os.path.join('bbox_txt', imgName.replace('.jpg', '.txt'))
-    target_txt_path = os.path.join(train_path, imgName.replace('.jpg', '.txt'))
+    
+    og_txt_path = os.path.join('bbox_txt', f'{basename}.tx')
+    target_txt_path = os.path.join(train_path, f'{basename}.txt')
 
     shutil.copyfile(og_txt_path, target_txt_path)
 
 for imgName in val_images:
+    basename, extension = os.path.splitext(imgName)
+
     og_path = os.path.join('images', imgName)
     target_path = os.path.join(val_path, imgName)
 
     shutil.copyfile(og_path, target_path)
 
-    og_txt_path = os.path.join('bbox_txt', imgName.replace('.jpg', '.txt'))
-    target_txt_path = os.path.join(val_path, imgName.replace('.jpg', '.txt'))
+    og_txt_path = os.path.join('bbox_txt', f'{basename}.txt')
+    target_txt_path = os.path.join(val_path, f'{basename}.txt')
 
     shutil.copyfile(og_txt_path, target_txt_path)
 
